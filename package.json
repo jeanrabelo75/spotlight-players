@@ -2,9 +2,9 @@
   "name": "spotlight-players",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/config/index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/config/index.js",
     "test": "mocha --exit"
   },
   "type" : "module",
