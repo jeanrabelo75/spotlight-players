@@ -1,0 +1,34 @@
+{
+  "leagues": [
+    {
+      "name": "Serie A",
+      "country": "Italy",
+      "code": "ITA1",
+      "number": 1
+    },
+    {
+      "name": "La Liga",
+      "country": "Spain",
+      "code": "SPA1",
+      "number": 2
+    },
+    {
+      "name": "Ligue 1",
+      "country": "France",
+      "code": "FRA1",
+      "number": 3
+    },
+    {
+      "name": "Premier League",
+      "country": "England",
+      "code": "ENG1",
+      "number": 4
+    },
+    {
+      "name": "Bundesliga",
+      "country": "Germany",
+      "code": "GER1",
+      "number": 5
+    }
+  ]
+}
