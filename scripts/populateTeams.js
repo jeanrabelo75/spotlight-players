@@ -18,10 +18,6 @@ const LEAGUES = JSON.parse(
 
 async function populateTeams() {
   try {
-    if (!API_FOOTBALL_KEY || !API_FOOTBALL_HOST || !API_FOOTBALL_URL) {
-      throw new Error("As configurações da API não foram encontradas.");
-    }
-
     for (const entry of LEAGUES.leagues) {
       const { name, country, code, number } = entry;
 
@@ -89,5 +85,11 @@ mongoose.connect("mongodb://localhost:27017/spotlightplayers", {
 
 mongoose.connection.once("open", () => {
   console.log("Conexão com o MongoDB estabelecida com sucesso!");
-  populateTeams();
+
+  if (!API_FOOTBALL_KEY || !API_FOOTBALL_HOST || !API_FOOTBALL_URL) {
+    console.log("As configurações da API não foram encontradas.");
+    process.exit(1);
+  } else {
+    populateTeams();
+  }
 });
