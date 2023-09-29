@@ -1,34 +1,10 @@
 {
   "leagues": [
     {
-      "name": "Serie A",
-      "country": "Italy",
-      "code": "ITA1",
-      "number": 135
-    },
-    {
-      "name": "La Liga",
-      "country": "Spain",
-      "code": "SPA1",
-      "number": 140
-    },
-    {
-      "name": "Ligue 1",
-      "country": "France",
-      "code": "FRA1",
-      "number": 61
-    },
-    {
       "name": "Premier League",
       "country": "England",
       "code": "ENG1",
       "number": 39
-    },
-    {
-      "name": "Bundesliga",
-      "country": "Germany",
-      "code": "GER1",
-      "number": 78
     }
   ]
 }

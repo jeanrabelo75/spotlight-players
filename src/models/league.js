@@ -11,7 +11,8 @@ const leagueSchema = new Schema({
   },
   code: { 
     type: String, 
-    required: true 
+    required: true,
+    unique: true
   },
   created_at: { 
     type: Date, 

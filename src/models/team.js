@@ -18,6 +18,9 @@ const teamSchema = new Schema({
     type: String, 
     required: true 
   },
+  external_id: {
+    type: Number
+  },
   founded: { 
     type: Number 
   },
