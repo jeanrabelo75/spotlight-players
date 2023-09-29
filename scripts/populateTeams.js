@@ -5,8 +5,9 @@ import { readFile } from "fs/promises";
 import Team from "../src/models/team.js";
 import League from "../src/models/league.js";
 
-config({ path: "../.env" });
+config();
 
+const MONGO_URI = process.env.MONGO_URI || "";
 const API_FOOTBALL_KEY = process.env.API_FOOTBALL_KEY || "";
 const API_FOOTBALL_URL = process.env.API_FOOTBALL_URL || "";
 const API_FOOTBALL_HOST = process.env.API_FOOTBALL_HOST || "";

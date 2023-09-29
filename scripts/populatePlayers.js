@@ -4,8 +4,9 @@ import { config } from "dotenv";
 import Team from "../src/models/team.js";
 import Player from "../src/models/player.js";
 
-config({ path: "../.env" });
+config();
 
+const MONGO_URI = process.env.MONGO_URI || "";
 const API_FOOTBALL_KEY = process.env.API_FOOTBALL_KEY || "";
 const API_FOOTBALL_URL = process.env.API_FOOTBALL_URL || "";
 const API_FOOTBALL_HOST = process.env.API_FOOTBALL_HOST || "";
@@ -28,7 +29,7 @@ async function fetchPlayers(teamExternalId, page) {
 
     console.log("Status da resposta da API:", response.status);
 
-    return response.data.response;
+    return response.data;
   } catch (error) {
     console.error("Erro ao buscar jogadores:", error);
     return [];
@@ -50,7 +51,7 @@ async function populatePlayers() {
           break;
         }
 
-        for (const playerData of playersData) {
+        for (const playerData of playersData.response) {
           const { player, statistics } = playerData;
 
           const name =
