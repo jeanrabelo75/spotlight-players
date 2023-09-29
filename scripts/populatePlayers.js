@@ -53,9 +53,10 @@ async function populatePlayers() {
         for (const playerData of playersData) {
           const { player, statistics } = playerData;
 
-          const name = player.firstname && player.lastname
-            ? `${player.firstname} ${player.lastname}`
-            : player.name;
+          const name =
+            player.firstname && player.lastname
+              ? `${player.firstname} ${player.lastname}`
+              : player.name;
 
           const newPlayer = new Player({
             name: name,
@@ -104,5 +105,11 @@ mongoose.connect("mongodb://localhost:27017/spotlightplayers", {
 
 mongoose.connection.once("open", () => {
   console.log("Conexão com o MongoDB estabelecida com sucesso!");
-  populatePlayers();
+
+  if (!API_FOOTBALL_KEY || !API_FOOTBALL_HOST || !API_FOOTBALL_URL) {
+    console.log("As configurações da API não foram encontradas.");
+    process.exit(1);
+  } else {
+    populatePlayers();
+  }
 });
