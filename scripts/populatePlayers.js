@@ -73,10 +73,14 @@ async function populatePlayers() {
             await newPlayer.save();
             console.log("Jogador " + player.name + " salvo!");
           } catch (error) {
-            console.error(
-              "Erro ao salvar o jogador " + player.name + ":",
-              error
-            );
+            if (error.code === 11000) {
+              console.warn("Jogador duplicado, pulando...");
+            } else {
+              console.error(
+                "Erro ao salvar o jogador " + player.name + ":",
+                error
+              );
+            }
           }
         }
 

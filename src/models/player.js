@@ -41,7 +41,8 @@ const playerSchema = new Schema({
     type: String,
   },
   external_id: {
-    type: Number
+    type: Number,
+    unique: true,
   },
   created_at: { 
     type: Date, 
