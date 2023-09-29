@@ -5,13 +5,14 @@ import { readFile } from 'fs/promises';
 import Team from "../src/models/team.js";
 import League from "../src/models/league.js";
 
-config();
+config({path: '../.env'});
 
 const API_FOOTBALL_KEY = process.env.API_FOOTBALL_KEY || "";
 const API_FOOTBALL_URL = process.env.API_FOOTBALL_URL || "";
 const API_FOOTBALL_HOST = process.env.API_FOOTBALL_HOST || "";
 
-const leagues = JSON.parse(
+const SEASON = "2023";
+const LEAGUES = JSON.parse(
   await readFile(
     new URL('../data/leagues.json', import.meta.url)
   )
@@ -23,10 +24,9 @@ async function populateTeams() {
       throw new Error("As configurações da API não foram encontradas.");
     }
 
-    for (const entry of leagues.leagues) {
+    for (const entry of LEAGUES.leagues) {
       const { name, country, code, number } = entry;
-      const season = "2023";
-
+      
       const response = await axios.get(API_FOOTBALL_URL + "teams", {
         headers: {
           "X-RapidAPI-Key": API_FOOTBALL_KEY,
@@ -34,7 +34,7 @@ async function populateTeams() {
         },
         params: {
           league: number,
-          season: season,
+          season: SEASON,
         },
       });
 

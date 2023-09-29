@@ -9,7 +9,8 @@ import loginRoutes from '../routes/loginRoutes.js';
 import errorHandler from '../middlewares/errorHandler.js';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated.js';
 
-config();
+config({path: '../../.env'});
+
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://mongo:27017/spotlightplayers';
 const SECRET_KEY = process.env.SECRET_KEY || '';
 
