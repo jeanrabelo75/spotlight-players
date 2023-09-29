@@ -7,11 +7,12 @@
     "start": "node src/config/index.js",
     "test": "mocha --exit"
   },
-  "type" : "module",
+  "type": "module",
   "keywords": [],
   "author": "Jean-Rabelo-Borges",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1467.0",
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
