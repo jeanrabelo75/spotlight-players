@@ -37,6 +37,9 @@ const playerSchema = new Schema({
     type: String, 
     required: true 
   },
+  photo: {
+    type: String,
+  },
   created_at: { 
     type: Date, 
     default: Date.now 
