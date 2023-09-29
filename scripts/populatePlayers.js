@@ -60,10 +60,11 @@ async function populatePlayers() {
           const newPlayer = new Player({
             name: name,
             team: team._id,
-            birthday: player.birth.date,
+            photo: player.photo,
             height: player.height,
             weight: player.weight,
-            photo: player.photo,
+            external_id: player.id,
+            birthday: player.birth.date,
             country: player.nationality,
             position: statistics[0].games.position,
           });

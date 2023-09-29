@@ -40,6 +40,9 @@ const playerSchema = new Schema({
   photo: {
     type: String,
   },
+  external_id: {
+    type: Number
+  },
   created_at: { 
     type: Date, 
     default: Date.now 
