@@ -1,15 +1,21 @@
 import axios from "axios";
 import mongoose from "mongoose";
 import { config } from "dotenv";
-import leagues from './leagues.json';
+import { readFile } from 'fs/promises';
 import Team from "../src/models/team.js";
 import League from "../src/models/league.js";
 
 config();
 
 const API_FOOTBALL_KEY = process.env.API_FOOTBALL_KEY || "";
-const API_FOOTBALL_HOST = process.env.API_FOOTBALL_HOST || "";
 const API_FOOTBALL_URL = process.env.API_FOOTBALL_URL || "";
+const API_FOOTBALL_HOST = process.env.API_FOOTBALL_HOST || "";
+
+const leagues = JSON.parse(
+  await readFile(
+    new URL('../data/leagues.json', import.meta.url)
+  )
+);
 
 async function populateTeams() {
   try {
