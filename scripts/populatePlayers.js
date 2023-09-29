@@ -12,6 +12,7 @@ const API_FOOTBALL_URL = process.env.API_FOOTBALL_URL || "";
 const API_FOOTBALL_HOST = process.env.API_FOOTBALL_HOST || "";
 
 const SEASON = "2023";
+const MAX_CALLS_PER_MINUTE = 30;
 
 async function fetchPlayers(teamExternalId, page) {
   try {
@@ -39,12 +40,20 @@ async function fetchPlayers(teamExternalId, page) {
 async function populatePlayers() {
   try {
     const teams = await Team.find();
+    let callsThisMinute = 0;
 
     for (const team of teams) {
-      let currentPage = 1;
       let totalPages = 1;
+      let currentPage = 1;
 
       do {
+        if (callsThisMinute >= MAX_CALLS_PER_MINUTE) {
+          console.log("Atingido o limite de chamadas por minuto. Aguardando...");
+          await new Promise((resolve) => setTimeout(resolve, 60000));
+
+          callsThisMinute = 0;
+        }
+
         const playersData = await fetchPlayers(team.external_id, currentPage);
 
         if (playersData.length === 0) {
