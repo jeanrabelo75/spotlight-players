@@ -9,7 +9,6 @@ import session from 'express-session';
 
 // Middlewares
 import errorHandler from '../middlewares/errorHandler.js';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated.js';
 
 // Routers
 import { loginRouter } from '../routes/loginRoutes.js';
@@ -51,6 +50,7 @@ app.get('/', (req, res) => {
 // ROUTE - USERS
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
+
 
 
 app.use(errorHandler);
