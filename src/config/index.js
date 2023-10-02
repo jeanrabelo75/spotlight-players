@@ -1,23 +1,19 @@
 // Packages
 import cors from 'cors';
-import { join } from 'path';
 import express from 'express';
 import pkg from 'body-parser';
 import { config } from 'dotenv';
 import { connect } from 'mongoose';
-import session from 'express-session';
 
 // Middlewares
 import errorHandler from '../middlewares/errorHandler.js';
 
-// Routers
-import { loginRouter } from '../routes/loginRoutes.js';
-import { registerRouter } from '../routes/registerRoutes.js';
+// Routes
+import { router } from '../routes/routes.js';
 
 config({path: '../../.env'});
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://mongo:27017/spotlightplayers';
-const SECRET_KEY = process.env.SECRET_KEY || '';
 
 connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -36,23 +32,7 @@ app.use(cors());
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
-app.use(session({
-  secret: SECRET_KEY,
-  resave: false,
-  saveUninitialized: false, 
-  cookie: { secure: false }
-}));
-
-app.get('/', (req, res) => {
-    res.send('SpotLight Players');
-});
-
-// ROUTE - USERS
-app.use('/register', registerRouter);
-app.use('/login', loginRouter);
-
-
-
+app.use('/api', router);
 app.use(errorHandler);
 
 app.listen(PORT, () => {

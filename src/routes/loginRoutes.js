@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { authenticate } from '../services/loginService.js';
 import { generateToken } from '../services/tokenService.js';
 
-const loginRouter = Router();
+const loginRoutes = Router();
 
-loginRouter.post('/', async (req, res, next) => {
+loginRoutes.post('/', async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -26,4 +26,4 @@ loginRouter.post('/', async (req, res, next) => {
   }
 });
 
-export { loginRouter };
+export { loginRoutes };

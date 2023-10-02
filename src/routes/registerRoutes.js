@@ -1,15 +1,15 @@
-import { Router } from 'express';
-import { createUser, getUserByEmail } from '../services/userService.js';
+import { Router } from "express";
+import { createUser, getUserByEmail } from "../services/userService.js";
 
-const registerRouter = Router();
+const registerRoutes = Router();
 
-registerRouter.post('/register', async (req, res, next) => {
+registerRoutes.post("/", async (req, res, next) => {
   try {
     const { email, password, name, birthday } = req.body;
 
     try {
       await getUserByEmail(email);
-      return res.status(400).json({ error: 'Email already in use' });
+      return res.status(400).json({ error: "Email already in use" });
     } catch (error) {
       if (error.statusCode !== 404) {
         throw error;
@@ -23,10 +23,12 @@ registerRouter.post('/register', async (req, res, next) => {
       birthday: new Date(birthday),
     });
 
-    res.status(201).json({ message: 'User created successfully', user: newUser });
+    res
+      .status(201)
+      .json({ message: "User created successfully", user: newUser });
   } catch (error) {
     next(error);
   }
 });
 
-export { registerRouter };
+export { registerRoutes };
