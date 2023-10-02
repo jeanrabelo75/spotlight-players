@@ -3,7 +3,7 @@ import authMiddleware from '../middlewares/auth.js';
 
 const profileRoutes = Router();
 
-profileRoutes.get('/profile', authMiddleware, (req, res) => {
+profileRoutes.get('/', authMiddleware, (req, res) => {
   const user = req.user;
   const { password, ...userInfo } = user.toObject();
 
