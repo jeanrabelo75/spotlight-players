@@ -1,5 +1,5 @@
 import { genSalt, hash } from 'bcrypt';
-import { Schema, Types, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
   password: { 

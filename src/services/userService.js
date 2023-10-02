@@ -1,4 +1,4 @@
-import user from '../models/user.js';
+import User from '../models/user.js';
 
 export async function createUser(userData) {
   if (!userData.email || !userData.password || !userData.name) {
@@ -8,7 +8,7 @@ export async function createUser(userData) {
   }
 
   try {
-    const newUser = await user.create(userData);
+    const newUser = await User.create(userData);
     return newUser;
   } catch (error) {
     if (error.name === 'MongoServerError' && error.code === 11000) {
@@ -25,7 +25,7 @@ export async function createUser(userData) {
 
 export async function getUserByEmail(email) {
   try {
-    const userByEmail = await user.findOne({ email });
+    const userByEmail = await User.findOne({ email });
     
     if (!userByEmail) {
       const error = new Error('No user found with this email.');

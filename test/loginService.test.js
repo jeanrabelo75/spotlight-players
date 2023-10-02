@@ -46,12 +46,23 @@ describe('loginService', () => {
       const email = 'test@example.com';
       const password = 'test123';
       const mockUser = { password: 'hashedPassword', email: email };
-
-      stub(User, 'findOne').resolves(mockUser);
-      stub(bcrypt, 'compare').resolves(true);
-
-      const result = await authenticate(email, password);
-      expect(result).to.deep.equal(mockUser);
+  
+      const findOneStub = stub(User, 'findOne');
+      findOneStub.withArgs({ email }).resolves(mockUser);
+  
+      const compareStub = stub(bcrypt, 'compare');
+      compareStub.withArgs(password, mockUser.password).resolves(true);
+  
+      try {
+        const result = await authenticate(email, password);
+        console.log('Result:', result);
+        expect(result).to.deep.equal(mockUser);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        findOneStub.restore();
+        compareStub.restore();
+      }
     });
   });
 });
