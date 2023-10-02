@@ -1,14 +1,14 @@
 import { join } from 'path';
 import { Router } from 'express';
-import { authenticate } from '../services/loginService.js';
+import { generateToken } from '../services/tokenService.js';
 
-const router = Router();
+const loginRoute = Router();
 
-router.get('/', (req, res) => {
+loginRoute.get('/', (req, res) => {
   res.sendFile(join(__dirname, '../views/', 'login.html'));
 });
 
-router.post('/', async (req, res, next) => {
+loginRoute.post('/', async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -22,12 +22,12 @@ router.post('/', async (req, res, next) => {
       return res.status(401).send({ error: 'Invalid email or password.' });
     }
 
-    req.session.user = user;
-    res.redirect('/logged');
+    const token = generateToken(user);
+    res.json({ token });
 
   } catch (error) {
     next(error);
   }
 });
 
-export default router;
+export { loginRoute };

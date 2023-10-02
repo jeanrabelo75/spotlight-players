@@ -1,3 +1,4 @@
+import cors from 'cors';
 import { join } from 'path';
 import express from 'express';
 import pkg from 'body-parser';
@@ -5,7 +6,7 @@ import { config } from 'dotenv';
 import { connect } from 'mongoose';
 import session from 'express-session';
 import userRoutes from '../routes/userRoutes.js';
-import loginRoutes from '../routes/loginRoutes.js';
+import { loginRoute } from '../routes/loginRoutes.js';
 import errorHandler from '../middlewares/errorHandler.js';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated.js';
 
@@ -27,6 +28,7 @@ const app = express();
 const PORT = 3000;
 const { urlencoded, json } = pkg;
 
+app.use(cors());
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
@@ -43,7 +45,7 @@ app.get('/', (req, res) => {
 
 // ROUTE - USERS
 app.use('/users', userRoutes);
-app.use('/login', loginRoutes);
+app.use('/login', loginRoute);
 app.get('/logged', ensureAuthenticated, (req, res) => {
   res.sendFile(join(__dirname, './src/views/', 'logged.html'));
 });

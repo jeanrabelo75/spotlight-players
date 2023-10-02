@@ -1,8 +1,8 @@
 import { compare } from 'bcrypt';
-import user from '../models/user.js';
+import User from '../models/user.js';
 
 export async function authenticate(email, password) {
-  const authenticateUser = await user.findOne({ email });
+  const authenticateUser = await User.findOne({ email });
 
   if (!authenticateUser) {
     const error = new Error("User not found");
@@ -10,7 +10,7 @@ export async function authenticate(email, password) {
     throw error;
   }
 
-  const isMatch = await compare(password, user.password);
+  const isMatch = await compare(password, authenticateUser.password);
 
   if (!isMatch) {
     const error = new Error("Incorrect password");
