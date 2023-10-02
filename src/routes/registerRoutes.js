@@ -1,6 +1,9 @@
+import { Router } from 'express';
 import { createUser, getUserByEmail } from '../services/userService.js';
 
-router.post('/register', async (req, res, next) => {
+const registerRouter = Router();
+
+registerRouter.post('/register', async (req, res, next) => {
   try {
     const { email, password, name, birthday } = req.body;
 
@@ -25,3 +28,5 @@ router.post('/register', async (req, res, next) => {
     next(error);
   }
 });
+
+export { registerRouter };
