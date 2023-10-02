@@ -2,22 +2,24 @@ import { genSalt, hash } from 'bcrypt';
 import { Schema, Types, model } from 'mongoose';
 
 const userSchema = new Schema({
-  password: {
+  password: { 
     type: String,
     required: true
   },
-  name: {
+  name: { 
     type: String,
     required: true
   },
-  role: {
+  role: { 
     type: String,
-    required: true
   },
-  team: {
+  team: { 
     type: Schema.Types.ObjectId,
     ref: 'Team',
-    required: true
+  },
+  birthday: { 
+    type: Date, 
+    required: true 
   },
   player: {
     type: Schema.Types.ObjectId,

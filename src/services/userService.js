@@ -1,4 +1,3 @@
-import { compare } from 'bcrypt';
 import user from '../models/user.js';
 
 export async function createUser(userData) {
@@ -22,25 +21,6 @@ export async function createUser(userData) {
       throw unexpectedError;
     }
   }
-}
-
-export async function validateUser(email, password) {
-  const validateUser = await user.findOne({ email });
-
-  if (!validateUser) {
-    const error = new Error('No user found with this email.');
-    error.statusCode = 401;
-    throw error;
-  }
-
-  const validPassword = await compare(password, validateUser.password);
-  if (!validPassword) {
-    const error = new Error('Incorrect password.');
-    error.statusCode = 401;
-    throw error;
-  }
-
-  return validateUser;
 }
 
 export async function getUserByEmail(email) {

@@ -1,14 +1,10 @@
-import { join } from 'path';
 import { Router } from 'express';
+import { authenticate } from '../services/loginService.js';
 import { generateToken } from '../services/tokenService.js';
 
-const loginRoute = Router();
+const loginRouter = Router();
 
-loginRoute.get('/', (req, res) => {
-  res.sendFile(join(__dirname, '../views/', 'login.html'));
-});
-
-loginRoute.post('/', async (req, res, next) => {
+loginRouter.post('/', async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -30,4 +26,4 @@ loginRoute.post('/', async (req, res, next) => {
   }
 });
 
-export { loginRoute };
+export { loginRouter };

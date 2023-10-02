@@ -1,3 +1,4 @@
+// Packages
 import cors from 'cors';
 import { join } from 'path';
 import express from 'express';
@@ -5,10 +6,14 @@ import pkg from 'body-parser';
 import { config } from 'dotenv';
 import { connect } from 'mongoose';
 import session from 'express-session';
-import userRoutes from '../routes/userRoutes.js';
-import { loginRoute } from '../routes/loginRoutes.js';
+
+// Middlewares
 import errorHandler from '../middlewares/errorHandler.js';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated.js';
+
+// Routers
+import { loginRouter } from '../routes/loginRoutes.js';
+import { registerRouter } from '../routes/registerRoutes.js';
 
 config({path: '../../.env'});
 
@@ -44,11 +49,10 @@ app.get('/', (req, res) => {
 });
 
 // ROUTE - USERS
-app.use('/users', userRoutes);
-app.use('/login', loginRoute);
-app.get('/logged', ensureAuthenticated, (req, res) => {
-  res.sendFile(join(__dirname, './src/views/', 'logged.html'));
-});
+app.use('/register', registerRouter);
+app.use('/login', loginRouter);
+
+
 
 app.use(errorHandler);
 
