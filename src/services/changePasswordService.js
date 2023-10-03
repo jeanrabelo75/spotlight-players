@@ -1,9 +1,9 @@
+import User from '../models/user.js';
 import { genSalt, hash } from 'bcrypt';
-import { getUserByEmail } from './userService.js';
 
 export async function changePassword(email, newPassword) {
   try {
-    const user = await getUserByEmail(email);
+    const user = await User.findOne({ email });
 
     if (!user) {
       const error = new Error('Usuário não encontrado.');
@@ -13,8 +13,8 @@ export async function changePassword(email, newPassword) {
 
     const salt = await genSalt(10);
     const hashedPassword = await hash(newPassword, salt);
-
     user.password = hashedPassword;
+    
     await user.save();
   } catch (error) {
     throw error;
