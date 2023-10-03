@@ -32,6 +32,10 @@ app.use(cors());
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
+app.get('/', (req, res) => {
+    res.send('Spotlight Players');
+});
+
 app.use('/api', router);
 app.use(errorHandler);
 
