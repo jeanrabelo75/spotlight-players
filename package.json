@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/config/index.js",
   "scripts": {
+    "test": "mocha --exit",
     "start": "node src/config/index.js",
-    "test": "mocha --exit"
+    "dev": "nodemon src/config/index.js"
   },
   "type": "module",
   "keywords": [],
@@ -25,6 +26,7 @@
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "mocha": "^10.2.0",
+    "nodemon": "^3.0.1",
     "prettier": "3.0.3",
     "sinon": "^15.2.0"
   }

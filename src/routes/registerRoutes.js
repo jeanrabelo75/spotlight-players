@@ -1,26 +1,24 @@
 import { Router } from "express";
-import { createUser, getUserByEmail } from "../services/userService.js";
+import User from "../models/user.js";
+import { createUser } from "../services/userService.js";
 
 const registerRoutes = Router();
 
 registerRoutes.post("/", async (req, res, next) => {
   try {
-    const { email, password, name, birthday } = req.body;
+    console.log(req.body);
+    const { email, password, name, birthdate } = req.body;
+    const user = await User.findOne({ email });
 
-    try {
-      await getUserByEmail(email);
+    if (user) {
       return res.status(400).json({ error: "Email already in use" });
-    } catch (error) {
-      if (error.statusCode !== 404) {
-        throw error;
-      }
     }
-
+    
     const newUser = await createUser({
+      name,
       email,
       password,
-      name,
-      birthday: new Date(birthday),
+      birthdate: new Date(birthdate),
     });
 
     res

@@ -15,4 +15,8 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URL=mongodb://localhost:27017/spotlightplayers
+      - MONGO_URL=mongodb://mongo:27017/spotlightplayers
+    volumes:
+      - ./src:/app/src
+    command: >
+      bash -c "npm install && npm run dev"
