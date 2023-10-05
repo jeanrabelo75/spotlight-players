@@ -1,11 +1,12 @@
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
+import User from '../models/user.js';
 
 config();
 
-const SECRET_KEY = process.env.JWT_SECRET || "";
+const SECRET_KEY = process.env.JWT_SECRET_KEY || "";
 
-function authMiddleware(req, res, next) {
+async function authMiddleware(req, res, next) {
   const authHeader = req.header("Authorization");
 
   if (!authHeader) {
@@ -19,14 +20,16 @@ function authMiddleware(req, res, next) {
   if (bearer !== "Bearer" || !token) {
     return res
       .status(401)
-      .json({ msg: "Token inválido. Acesso não autorizado." });
+      .json({ msg: "Bearer Token inválido. Acesso não autorizado." });
   }
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    req.user = decoded.user;
+    const decodedUser = await User.find({_id: decoded.userInfo._id })
+    req.user = decodedUser;
     next();
   } catch (error) {
+    console.log(error);
     res.status(401).json({ msg: "Token inválido. Acesso não autorizado." });
   }
 }

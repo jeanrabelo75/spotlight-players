@@ -20,3 +20,17 @@ export async function changePassword(email, newPassword) {
     throw error;
   }
 }
+
+export async function updateProfile(userId, reqBody) {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: reqBody },
+      { new: true }
+    );
+
+    res.json(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+}
