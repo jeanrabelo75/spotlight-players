@@ -18,12 +18,12 @@ registerRoutes.post("/", async (req, res, next) => {
       name,
       email,
       password,
-      birthdate: new Date(birthdate),
+      birthday: new Date(birthdate),
     });
 
     res
       .status(201)
-      .json({ message: "User created successfully", user: newUser });
+      .json({ message: "User created successfully" });
   } catch (error) {
     next(error);
   }
