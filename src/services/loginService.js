@@ -20,3 +20,13 @@ export async function authenticate(email, password) {
 
   return authenticateUser;
 }
+
+export default function getUserWithoutPass(user) {
+  return {
+    _id: user._id.toHexString(),
+    email: user.email,
+    name: user.name,
+    birthday: user.birthday,
+    created_at: user.created_at
+  }
+}

@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { authenticate } from '../services/loginService.js';
-import { generateToken } from '../services/tokenService.js';
+import getUserWithoutPass, { authenticate } from '../services/loginService.js';
 
 const loginRoutes = Router();
 
@@ -18,9 +17,8 @@ loginRoutes.post('/', async (req, res, next) => {
       return res.status(401).send({ error: 'Invalid email or password.' });
     }
 
-    const token = generateToken(user);
-    res.json({ token });
-
+    const userWithoutPass = getUserWithoutPass(user);
+    res.json({ user: userWithoutPass });
   } catch (error) {
     next(error);
   }
