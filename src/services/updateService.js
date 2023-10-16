@@ -21,16 +21,29 @@ export async function changePassword(email, newPassword) {
   }
 }
 
-export async function updateProfile(userId, reqBody) {
-  try {
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { $set: reqBody },
-      { new: true }
-    );
+export async function updateProfile(body) {
+  const { email, name, birthday } = body;
 
-    res.json(updatedUser);
+  if (!email && !name && !birthday) {
+    const error = new Error('No fields to update');
+    error.statusCode = 400;
+    throw error;
+  }
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      const error = new Error('User not found');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    if (name) user.name = name;
+    if (birthday) user.birthday = birthday;
+
+    await user.save();
   } catch (error) {
-    next(error);
+    throw error;
   }
 }

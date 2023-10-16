@@ -29,7 +29,6 @@ async function authMiddleware(req, res, next) {
     req.user = decodedUser;
     next();
   } catch (error) {
-    console.log(error);
     res.status(401).json({ msg: "Token inválido. Acesso não autorizado." });
   }
 }

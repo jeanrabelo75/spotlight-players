@@ -1,4 +1,3 @@
-import e from "cors";
 import User from "../models/user.js";
 
 export async function createUser(userData) {
@@ -19,7 +18,6 @@ export async function createUser(userData) {
     const newUser = await User.create(userData);
     return newUser;
   } catch (error) {
-    console.log(error);
     if (error.name === "MongoServerError" && error.code === 11000) {
       const duplicateError = new Error("Email already in use.");
       duplicateError.statusCode = 409;
