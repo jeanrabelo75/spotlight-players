@@ -6,7 +6,7 @@ import { config } from 'dotenv';
 import { connect } from 'mongoose';
 
 // Middlewares
-import errorHandler from '../middlewares/errorHandler.js';
+import error from '../middlewares/error.js';
 
 // Routes
 import { router } from '../routes/routes.js';
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', router);
-app.use(errorHandler);
+app.use(error);
 
 app.listen(PORT, () => {
     console.log(`Spotlight is listening on port ${PORT}`);
