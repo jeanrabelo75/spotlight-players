@@ -1,41 +1,45 @@
-import { Schema, Types, model } from 'mongoose';
+import { Schema, Types, model } from "mongoose";
 
 const playerSchema = new Schema({
-  name: { 
-    type: String, 
-    required: true 
+  name: {
+    type: String,
+    required: true,
   },
-  type: { 
-    type: String 
+  type: {
+    type: String,
   },
-  team: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'Team', 
-    required: true 
+  team: {
+    type: Schema.Types.ObjectId,
+    ref: "Team",
+    required: true,
   },
-  birthday: { 
-    type: Date, 
-    required: true 
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
-  height: { 
-    type: String 
+  birthday: {
+    type: Date,
+    required: true,
   },
-  weight: { 
-    type: String 
+  height: {
+    type: String,
   },
-  position: { 
-    type: Object, 
-    required: true 
+  weight: {
+    type: String,
   },
-  number: { 
-    type: Number 
+  position: {
+    type: Object,
+    required: true,
   },
-  preferred_foot: { 
-    type: String 
+  number: {
+    type: Number,
   },
-  country: { 
-    type: String, 
-    required: true 
+  preferred_foot: {
+    type: String,
+  },
+  country: {
+    type: String,
+    required: true,
   },
   photo: {
     type: String,
@@ -44,15 +48,15 @@ const playerSchema = new Schema({
     type: Number,
     unique: true,
   },
-  created_at: { 
-    type: Date, 
-    default: Date.now 
+  created_at: {
+    type: Date,
+    default: Date.now,
   },
-  updated_at: { 
-    type: Date 
-  }
+  updated_at: {
+    type: Date,
+  },
 });
 
-const Player = model('Player', playerSchema);
+const Player = model("Player", playerSchema);
 
 export default Player;

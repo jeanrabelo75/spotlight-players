@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import getUserWithoutPass, { authenticate } from '../services/loginService.js';
+import { Router } from "express";
+import getUserWithoutPass, { authenticate } from "../services/loginService.js";
 
 const loginRoutes = Router();
 
-loginRoutes.post('/', async (req, res, next) => {
+loginRoutes.post("/", async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -21,7 +21,7 @@ loginRoutes.post('/', async (req, res, next) => {
 
     return res.json({
       status: 200,
-      user: userWithoutPass
+      user: userWithoutPass,
     });
   } catch (error) {
     next(error);

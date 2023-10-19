@@ -1,17 +1,17 @@
-version: '3.8'
+version: "3.8"
 
 services:
   mongo:
     image: mongo:latest
     container_name: mongodb
     ports:
-      - '27017:27017'
-  
+      - "27017:27017"
+
   app:
     build: .
     container_name: spotlight-app
     ports:
-      - '3000:3000'
+      - "3000:3000"
     depends_on:
       - mongo
     environment:

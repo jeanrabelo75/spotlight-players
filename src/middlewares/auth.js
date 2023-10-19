@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
-import User from '../models/user.js';
+import User from "../models/user.js";
 
 config();
 
@@ -25,7 +25,7 @@ async function authMiddleware(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    const decodedUser = await User.find({_id: decoded.userInfo._id })
+    const decodedUser = await User.find({ _id: decoded.userInfo._id });
     req.user = decodedUser;
     next();
   } catch (error) {

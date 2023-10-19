@@ -1,45 +1,45 @@
-import { genSalt, hash } from 'bcrypt';
-import { Schema, model } from 'mongoose';
+import { genSalt, hash } from "bcrypt";
+import { Schema, model } from "mongoose";
 
 const userSchema = new Schema({
-  password: { 
+  password: {
     type: String,
-    required: true
+    required: true,
   },
-  email: { 
+  email: {
     type: String,
-    required: true
+    required: true,
   },
-  name: { 
+  name: {
     type: String,
-    required: true
+    required: true,
   },
-  role: { 
-    type: String,
+  role: {
+    type: Object,
   },
-  team: { 
+  team: {
     type: Schema.Types.ObjectId,
-    ref: 'Team',
+    ref: "Team",
   },
-  birthday: { 
-    type: Date, 
-    required: true 
+  birthday: {
+    type: Date,
+    required: true,
   },
   player: {
     type: Schema.Types.ObjectId,
-    ref: 'Player'
+    ref: "Player",
   },
-  created_at: { 
-    type: Date, 
-    default: Date.now 
+  created_at: {
+    type: Date,
+    default: Date.now,
   },
-  updated_at: { 
-    type: Date 
-  }
+  updated_at: {
+    type: Date,
+  },
 });
 
-userSchema.pre('save', async function (next) {
-  if (this.isModified('password') || this.isNew) {
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password") || this.isNew) {
     try {
       const salt = await genSalt(10);
       this.password = await hash(this.password, salt);
@@ -52,6 +52,6 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-const User = model('User', userSchema);
+const User = model("User", userSchema);
 
 export default User;

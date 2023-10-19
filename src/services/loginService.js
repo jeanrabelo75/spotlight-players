@@ -1,6 +1,6 @@
-import { compare } from 'bcrypt';
-import User from '../models/user.js';
-import { generateToken } from './tokenService.js';
+import { compare } from "bcrypt";
+import User from "../models/user.js";
+import { generateToken } from "./tokenService.js";
 
 export async function authenticate(email, password) {
   const authenticateUser = await User.findOne({ email });
@@ -24,13 +24,13 @@ export async function authenticate(email, password) {
 
 export default function getUserWithoutPass(user) {
   const token = generateToken(user);
-  
+
   return {
     _id: user._id.toHexString(),
     name: user.name,
     email: user.email,
     accessToken: token,
     birthday: user.birthday,
-    created_at: user.created_at
-  }
+    created_at: user.created_at,
+  };
 }

@@ -13,7 +13,7 @@ registerRoutes.post("/", async (req, res, next) => {
     if (user) {
       return res.status(400).json({ error: "Email already in use" });
     }
-    
+
     const newUser = await createUser({
       name,
       email,
@@ -21,9 +21,7 @@ registerRoutes.post("/", async (req, res, next) => {
       birthday: new Date(birthdate),
     });
 
-    res
-      .status(201)
-      .json({ message: "User created successfully" });
+    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     next(error);
   }

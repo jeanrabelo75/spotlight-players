@@ -1,30 +1,30 @@
-import { Schema, Types, model } from 'mongoose';
+import { Schema, Types, model } from "mongoose";
 
-const videoSchema  = new Schema({
-  players: { 
-    type: [Schema.Types.ObjectId], 
-    ref: 'Player', 
-    required: true 
+const videoSchema = new Schema({
+  players: {
+    type: [Schema.Types.ObjectId],
+    ref: "Player",
+    required: true,
   },
-  team: { 
+  team: {
     type: Schema.Types.ObjectId,
-     ref: 'Team' 
+    ref: "Team",
   },
-  type: { 
-    type: String 
+  type: {
+    type: String,
   },
-  tags: { 
-    type: Object 
+  tags: {
+    type: Object,
   },
-  created_at: { 
-    type: Date, 
-    default: Date.now 
+  created_at: {
+    type: Date,
+    default: Date.now,
   },
-  updated_at: { 
-    type: Date 
-  }
+  updated_at: {
+    type: Date,
+  },
 });
 
-const Video = model('Video', videoSchema);
+const Video = model("Video", videoSchema);
 
 export default Video;

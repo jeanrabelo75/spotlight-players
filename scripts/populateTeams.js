@@ -14,7 +14,7 @@ const API_FOOTBALL_HOST = process.env.API_FOOTBALL_HOST || "";
 
 const SEASON = "2023";
 const LEAGUES = JSON.parse(
-  await readFile(new URL("../data/leagues.json", import.meta.url))
+  await readFile(new URL("../data/leagues.json", import.meta.url)),
 );
 
 async function populateTeams() {
@@ -38,7 +38,7 @@ async function populateTeams() {
       const league = await League.findOneAndUpdate(
         { code },
         { name, country, code },
-        { upsert: true, new: true }
+        { upsert: true, new: true },
       );
 
       for (const entry of response.data.response) {

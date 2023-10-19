@@ -48,7 +48,9 @@ async function populatePlayers() {
 
       do {
         if (callsThisMinute >= MAX_CALLS_PER_MINUTE) {
-          console.log("Atingido o limite de chamadas por minuto. Aguardando...");
+          console.log(
+            "Atingido o limite de chamadas por minuto. Aguardando...",
+          );
           await new Promise((resolve) => setTimeout(resolve, 60000));
 
           callsThisMinute = 0;
@@ -89,7 +91,7 @@ async function populatePlayers() {
             } else {
               console.error(
                 "Erro ao salvar o jogador " + player.name + ":",
-                error
+                error,
               );
             }
           }
