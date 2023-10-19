@@ -15,7 +15,8 @@ const userSchema = new Schema({
     required: true,
   },
   role: {
-    type: Object,
+    type: Schema.Types.ObjectId,
+    ref: "Roles",
   },
   team: {
     type: Schema.Types.ObjectId,

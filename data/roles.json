@@ -1,0 +1,83 @@
+{
+  "roles": [
+    {
+      "name": "super-admin",
+      "permissions": [
+        "create-team",
+        "read-team",
+        "update-team",
+        "delete-team",
+        "create-player",
+        "read-player",
+        "update-player",
+        "delete-player",
+        "create-video",
+        "read-video",
+        "update-video",
+        "delete-video",
+        "create-user",
+        "read-user",
+        "update-user",
+        "delete-user"
+      ]
+    },
+    {
+      "name": "admin",
+      "permissions": [
+        "read-team",
+        "update-team",
+        "delete-team",
+        "create-player",
+        "read-player",
+        "update-player",
+        "delete-player",
+        "create-video",
+        "read-video",
+        "update-video",
+        "delete-video",
+        "read-user",
+        "update-user"
+      ]
+    },
+    {
+      "name": "super-staff",
+      "permissions": [
+        "read-team",
+        "create-player",
+        "read-player",
+        "update-player",
+        "delete-player",
+        "create-video",
+        "read-video",
+        "update-video",
+        "delete-video",
+        "read-user",
+        "update-user"
+      ]
+    },
+    {
+      "name": "staff",
+      "permissions": [
+        "read-team",
+        "read-player",
+        "create-video",
+        "read-video",
+        "update-video",
+        "delete-video",
+        "read-user",
+        "update-user"
+      ]
+    },
+    {
+      "name": "player",
+      "permissions": [
+        "read-team",
+        "read-player",
+        "read-video",
+        "update-video",
+        "read-user",
+        "update-user"
+      ]
+    }
+  ]
+}
